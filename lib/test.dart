@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class TestRouteWidget extends StatelessWidget {
   @override
@@ -25,9 +27,11 @@ class TestRouteWidget extends StatelessWidget {
         child: Wrap(
           direction: Axis.horizontal,
           children: <Widget>[
-            MyButtonWidget(),
-            CounterWidget(),
-            Counter(),
+            // MyButtonWidget(),
+            // CounterWidget(),
+            // Counter(),
+            // ImageTestRoute(),
+            CacheImageRoute(),
           ],
         ),
       ),
@@ -142,6 +146,34 @@ class _CounterState01 extends State<Counter> {
           count: _counter,
         ),
       ],
+    );
+  }
+}
+
+class ImageTestRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Center(
+      child: FadeInImage.memoryNetwork(
+        placeholder: kTransparentImage,
+        image:
+            'http://img4.duitang.com/uploads/item/201308/15/20130815174605_8vmUU.thumb.700_0.jpeg',
+      ),
+    );
+  }
+}
+
+class CacheImageRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: CachedNetworkImage(
+        imageUrl:
+            'http://pic1.win4000.com/wallpaper/2018-03-28/5abafe0c311e6.jpg',
+        placeholder: (context, url) => new CircularProgressIndicator(),
+        errorWidget: (context, url, error) => new Icon(Icons.error),
+      ),
     );
   }
 }

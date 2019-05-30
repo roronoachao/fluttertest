@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterlab/test.dart';
+import 'package:flutterlab/shop.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,10 +21,13 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+        brightness: Brightness.light,
+        accentColor: Colors.cyan[600],
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
       routes: {
         'test': (context) => TestRouteWidget(),
+        'shop': (context) => Shopping(),
       },
     );
   }
@@ -110,16 +114,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text('跳转'),
                 onPressed: () {
                   Navigator.of(context).pushNamed('test');
+                  // Navigator.of(context).pushNamed('shop');
                 },
               ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      floatingActionButton: Theme(
+        data: Theme.of(context).copyWith(accentColor: Colors.yellow),
+        child: FloatingActionButton(
+          onPressed: _incrementCounter,
+          tooltip: 'Increment',
+          child: Icon(Icons.add),
+        ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
